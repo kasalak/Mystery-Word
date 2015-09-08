@@ -108,30 +108,40 @@ difficulty_level = input(Please select a difficulty level of 'Easy,' 'Medium,' o
 
 #loading words to use in game:
 
-with open('[/usr/share/dict/words]') as o:
+with open('/usr/share/dict/words') as o:
     loaded_words = o.read().lower()
-loaded_words = loaded_words.split()
+    loaded_words = loaded_words.split()
 
 #prompt for difficulty level:
-difficulty_level = input("Please select a difficulty level of 'Easy,' 'Medium,' or 'Difficult.'").lower()
-if difficulty_level = 'easy':
-    selected_word = random_word(list_easy(loaded_words))
-elif difficulty_level = 'medium':
-    selected_word = random_word(list_medium(loaded_words))
-elif difficulty_level = 'difficult':
-    selected_word = random_word(list_hard(loaded_words))
-else:
-    print("That is not a valid selection. Please try again.")
-
+difficulty_level = input("Please select a difficulty level of 'Easy,' 'Medium,' or 'Difficult.' ").lower()
+if difficulty_level == 'easy':
+    selected_word = random_word(easy_words(loaded_words))
+elif difficulty_level == 'medium':
+    selected_word = random_word(medium_words(loaded_words))
+elif difficulty_level == 'difficult':
+    selected_word = random_word(hard_words(loaded_words))
+elif difficulty_level != 'easy' or difficulty_level != 'medium' or difficulty_level != 'difficult':
+    input("That is not a valid selection. You are automatically given a 'random' word. ").lower()
+    selected_word = random_word(loaded_words)
 
 #using guesses to limit game length
 total_guesses = 8
-letters_guessed = []
-total_guessed = []
-while total_guessed < total guesses:
-    
-print("The word that has been selected has {} letters.".format(len(selected_word))
-print("You have {} guesses remaining.").format(total_guesses - len(total_guessed))
+wrong_guesses = 0
+guesses = []
+total_guessed = len(guesses)
+word = selected_word
+
+print("The word that has been selected has {} letters. ".format(len(selected_word)))
+
+print("You have {} guesses remaining and have made {} incorrect guesses.".format(total_guesses, wrong_guesses))
+while is_word_complete(selected_word, guesses) == False:
+    current_guess =input("Guess a letter. ").lower()
+    if len(current_guess) != 1:
+        print("Guesses must only be one letter.")
+    elif current_guess not in guesses:
+        guesses += current_guess
+
+
 
 
 if __name__ == '__main__':
