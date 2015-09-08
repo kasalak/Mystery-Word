@@ -9,7 +9,7 @@ class TestMysteryWord(unittest.TestCase):
 
     def test_easy_words(self):
         self.assertEqual(easy_words(word_list), ["bird", "calf", "river", "stream", "brain"])
-
+## use len to get length of words then move into list  easy_words < 3 => 6
 
     def test_medium_words(self):
         self.assertEqual(medium_words(word_list), ["stream", "kneecap", "cookbook", "language", "sneaker"])
