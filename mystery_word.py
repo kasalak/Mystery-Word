@@ -92,6 +92,8 @@ def main():
     Runs when the program is called from the command-line.
 
     1. Prompts the user for a difficulty level
+difficulty_level = input(Please select a difficulty level of 'Easy,' 'Medium,' or "Difficult.")
+    if difficulty_level = 'Easy'
     2. Sets up the game based upon the difficulty level
     3. Performs the game loop, consisting of:
        a. Printing the word in progress, using _ for unguessed letters
@@ -101,7 +103,35 @@ def main():
     4. Finishing the game and displaying whether the user has won or lost
     5. Giving the user the option to play again
     """
+
     # TODO
+
+#loading words to use in game:
+
+with open('[/usr/share/dict/words]') as o:
+    loaded_words = o.read().lower()
+loaded_words = loaded_words.split()
+
+#prompt for difficulty level:
+difficulty_level = input("Please select a difficulty level of 'Easy,' 'Medium,' or 'Difficult.'").lower()
+if difficulty_level = 'easy':
+    selected_word = random_word(list_easy(loaded_words))
+elif difficulty_level = 'medium':
+    selected_word = random_word(list_medium(loaded_words))
+elif difficulty_level = 'difficult':
+    selected_word = random_word(list_hard(loaded_words))
+else:
+    print("That is not a valid selection. Please try again.")
+
+
+#using guesses to limit game length
+total_guesses = 8
+letters_guessed = []
+total_guessed = []
+while total_guessed < total guesses:
+    
+print("The word that has been selected has {} letters.".format(len(selected_word))
+print("You have {} guesses remaining.").format(total_guesses - len(total_guessed))
 
 
 if __name__ == '__main__':
