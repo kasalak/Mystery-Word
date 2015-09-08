@@ -50,6 +50,8 @@ def random_word(word_list):
     # TODO
     return random.choice(word_list)
 
+
+
 def display_word(word, guesses):
     """
     Returns a string that including blanks (_) and letters from the given word,
@@ -62,8 +64,14 @@ def display_word(word, guesses):
     and d, this function should return 'B _ _ B A _ D'.
     """
     # TODO
-    for word in word_list:
-        
+    display = []
+    for letter in word:
+        if letter in guesses:
+            display.append(letter)
+        else:
+            display.append("_")
+    display = " ".join(display).upper()
+    return display
 
 
 def is_word_complete(word, guesses):
@@ -73,6 +81,10 @@ def is_word_complete(word, guesses):
     """
     # TODO
     pass
+    for letter in word:
+        if letter not in guesses:
+            return False
+    return True
 
 
 def main():
