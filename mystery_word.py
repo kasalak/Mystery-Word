@@ -1,11 +1,17 @@
+import random
+
 
 def easy_words(word_list):
     """
     Returns a filtered version of the word list with words only containing
     4-6 characters.
     """
-    # TODO
-    pass
+    list_easy = []
+
+    for words in word_list:
+        if 3 < len(words) < 7:
+            list_easy.append(words)
+    return list_easy
 
 
 def medium_words(word_list):
@@ -14,8 +20,13 @@ def medium_words(word_list):
     6-8 characters.
     """
     # TODO
-    pass
 
+    list_medium = []
+
+    for words in word_list:
+        if 5 < len(words) < 9:
+            list_medium.append(words)
+    return list_medium
 
 def hard_words(word_list):
     """
@@ -23,7 +34,13 @@ def hard_words(word_list):
     8+ characters.
     """
     # TODO
-    pass
+
+    list_hard = []
+
+    for words in word_list:
+        if len(words) > 7:
+            list_hard.append(words)
+    return list_hard
 
 
 def random_word(word_list):
@@ -31,8 +48,7 @@ def random_word(word_list):
     Returns a random word from the word list.
     """
     # TODO
-    pass
-
+    return random.choice(word_list)
 
 def display_word(word, guesses):
     """
@@ -46,7 +62,8 @@ def display_word(word, guesses):
     and d, this function should return 'B _ _ B A _ D'.
     """
     # TODO
-    pass
+    for word in word_list:
+        
 
 
 def is_word_complete(word, guesses):
