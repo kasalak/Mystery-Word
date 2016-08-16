@@ -1,148 +1,77 @@
 import random
 
 
-def easy_words(word_list):
-    """
-    Returns a filtered version of the word list with words only containing
-    4-6 characters.
-    """
-    list_easy = []
 
-    for words in word_list:
-        if 3 < len(words) < 7:
-            list_easy.append(words)
-    return list_easy
+def easy_words(): # creates a list of words with 4-6 letters
+    for word in word_list:
 
+        if len(word) < 7  and len(word) > 3:
+            word_bank.append(word)
+    word = random.choice(word_bank)
+    print("The word has {} letters".format(len(word)))
 
-def medium_words(word_list):
-    """
-    Returns a filtered version of the word list with words only containing
-    6-8 characters.
-    """
-    # TODO
+def normal_words(): # creates a list of words with 6-8 letters
+    for word in word_list:
 
-    list_medium = []
+        if len(word) < 9 and len(word) > 5:
+            normal_list.append(word)
 
-    for words in word_list:
-        if 5 < len(words) < 9:
-            list_medium.append(words)
-    return list_medium
-
-def hard_words(word_list):
-    """
-    Returns a filtered version of the word list with words only containing
-    8+ characters.
-    """
-    # TODO
-
-    list_hard = []
-
-    for words in word_list:
-        if len(words) > 7:
-            list_hard.append(words)
-    return list_hard
+    word = random.choice(word_bank)
+    print("The word has {} letters".format(len(word)))
 
 
-def random_word(word_list):
-    """
-    Returns a random word from the word list.
-    """
-    # TODO
-    return random.choice(word_list)
+def hard_words():
+    for word in word_list:
 
+        if len(word) > 7:
+            word_bank.append(word)
 
+    word = random.choice(word_bank)
+    print("The word has {} letters".format(len(word)))
 
-def display_word(word, guesses):
-    """
-    Returns a string that including blanks (_) and letters from the given word,
-    filling in letters based upon the list of guesses.
+def choose_difficulty():
+    print("What difficulty level would you like to choose? ")
+    level = input("> ")
+    if "easy" in level:
+        easy_words()
+    elif "normal" in level:
+        normal_words()
+    elif "hard" in level:
+        hard_words()
+    else:
+        print("Difficulty not chosen. Game will now exit.")
 
-    There should be spaces between each blank _ and each letter. Each letter
-    should be capitalized for display.
+def guesses():
+    letters = list(word)
+    print(letters)
+    wrong_guesses = []
+    correct_guesses = []
+    guesses_left = 8
 
-    For example, if the word is BOMBARD and the letters guessed are a, b,
-    and d, this function should return 'B _ _ B A _ D'.
-    """
-    # TODO
-    display = []
-    for letter in word:
-        if letter in guesses:
-            display.append(letter)
+    while guesses_left != 0:
+        letter = input("Guess a letter. You have {} guesses remaining. ".format(guesses_left))
+
+        if letter in letters:
+            correct_guesses += letter
+            print("Letters in word: {} The word has {} letters.".format(correct_guesses, len(word)))
+        elif letter in wrong_guesses or letter in correct_guesses:
+            print("You've guessed this letter before. Try again.")
         else:
-            display.append("_")
-    display = " ".join(display).upper()
-    return display
+            wrong_guesses += letter
+            guesses_left -= 1
+            print("Wrong letters guessed: {}".format(wrong_guesses))
+
+        if len(letters) == len(correct_guesses) and guesses_left != 0:
+            print("""Congratulations! You've guessed the word: {} with {} guesses left!""".format(word, guesses_left))
+            break
 
 
-def is_word_complete(word, guesses):
-    """
-    Returns True if the list of guesses covers every letter in the word,
-    otherwise returns False.
-    """
-    # TODO
-    pass
-    for letter in word:
-        if letter not in guesses:
-            return False
-    return True
-
-
-def main():
-    """
-    Runs when the program is called from the command-line.
-
-    1. Prompts the user for a difficulty level
-difficulty_level = input(Please select a difficulty level of 'Easy,' 'Medium,' or "Difficult.")
-    if difficulty_level = 'Easy'
-    2. Sets up the game based upon the difficulty level
-    3. Performs the game loop, consisting of:
-       a. Printing the word in progress, using _ for unguessed letters
-       b. Printing the number of guesses remaining
-       c. Printing the letters that have been guessed so far
-       d. Prompting the user for a letter to guess
-    4. Finishing the game and displaying whether the user has won or lost
-    5. Giving the user the option to play again
-    """
-
-    # TODO
-
-#loading words to use in game:
 
 with open('/usr/share/dict/words') as o:
     loaded_words = o.read().lower()
-    loaded_words = loaded_words.split()
+    word_list = loaded_words.split()
+    word_bank = []
 
-#prompt for difficulty level:
-difficulty_level = input("Please select a difficulty level of 'Easy,' 'Medium,' or 'Difficult.' ").lower()
-if difficulty_level == 'easy':
-    selected_word = random_word(easy_words(loaded_words))
-elif difficulty_level == 'medium':
-    selected_word = random_word(medium_words(loaded_words))
-elif difficulty_level == 'difficult':
-    selected_word = random_word(hard_words(loaded_words))
-elif difficulty_level != 'easy' or difficulty_level != 'medium' or difficulty_level != 'difficult':
-    input("That is not a valid selection. You are automatically given a 'random' word. ").lower()
-    selected_word = random_word(loaded_words)
-
-#using guesses to limit game length
-total_guesses = 8
-wrong_guesses = 0
-guesses = []
-total_guessed = len(guesses)
-word = selected_word
-
-print("The word that has been selected has {} letters. ".format(len(selected_word)))
-
-print("You have {} guesses remaining and have made {} incorrect guesses.".format(total_guesses, wrong_guesses))
-while is_word_complete(selected_word, guesses) == False:
-    current_guess =input("Guess a letter. ").lower()
-    if len(current_guess) != 1:
-        print("Guesses must only be one letter.")
-    elif current_guess not in guesses:
-        guesses += current_guess
-
-
-
-
-if __name__ == '__main__':
-    main()
+choose_difficulty()
+word = random.choice(word_bank)
+guesses()
